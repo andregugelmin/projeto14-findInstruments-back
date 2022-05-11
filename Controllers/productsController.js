@@ -6,7 +6,7 @@ export async function getProducts(req, res) {
         const products = await db.collection('products').find().toArray();
         res.send(products);
     } catch (e) {
-        console.error(chalk.bold.red('Could not get transactions'), e);
+        console.error(chalk.bold.red('Could not get products'), e);
         res.status(500).send('Could not get products ' + e);
     }
 }

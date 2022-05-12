@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { ObjectId } from 'mongodb';
-import db from '../db';
+import db from '../db.js';
 
 export async function getCartProducts(req, res) {
     const user = res.locals.user;

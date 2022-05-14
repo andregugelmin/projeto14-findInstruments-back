@@ -43,10 +43,11 @@ export async function postCartProduct(req, res) {
 
 export async function deleteCartProduct(req, res) {
     const { PRODUCT_ID } = req.params;
+
     try {
         const product = await db
             .collection('cart')
-            .findOne({ id: new ObjectId(PRODUCT_ID) });
+            .findOne({ _id: new ObjectId(PRODUCT_ID) });
         if (!product) {
             res.status(404).send({
                 message: 'Product ID not found on database',

@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import chalk from 'chalk';
 
-import signUpRouter from './Routers/signUpRouter.js'
+import signUpRouter from './Routers/signUpRouter.js';
 import productsRouter from './Routers/productsRouter.js';
 import cartRouter from './Routers/cartRouter.js';
 

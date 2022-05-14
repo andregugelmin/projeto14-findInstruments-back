@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validToken } from '../Middlewares/userTokenValidation.js';
 import {
     getCartProducts,
     postCartProduct,
@@ -8,7 +9,7 @@ import {
 const cartProductRouter = Router();
 
 cartProductRouter.get('/cart', getCartProducts);
-cartProductRouter.post('/cart', postCartProduct);
+cartProductRouter.post('/cart', validToken, postCartProduct);
 cartProductRouter.delete('/cart/:PRODUCT_ID', deleteCartProduct);
 
 export default cartProductRouter;

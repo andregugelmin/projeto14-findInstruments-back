@@ -28,7 +28,7 @@ export async function postCartProduct(req, res) {
         await db.collection('cart').insertOne({
             username: user,
             name: productInfo.name,
-            id: productInfo.id,
+            image: productInfo.image,
             price: productInfo.price,
         });
         res.sendStatus(201);

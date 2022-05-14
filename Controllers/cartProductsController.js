@@ -8,7 +8,7 @@ export async function getCartProducts(req, res) {
     try {
         const cartProducts = await db.collection('cart').find().toArray();
         const userCartProducts = cartProducts.filter(
-            (product) => product.username === user.name
+            (product) => product.username === user
         );
         res.send({ products: userCartProducts });
     } catch (e) {

@@ -3,12 +3,8 @@ import cors from 'cors';
 import chalk from 'chalk';
 import dotenv from 'dotenv'
 
-<<<<<<< HEAD
 import loginRouter from './Routers/loginrouter.js';
 import signUpRouter from './Routers/signUpRouter.js'
-=======
-import signUpRouter from './Routers/signUpRouter.js';
->>>>>>> 1743b593923d30e84e65f5c5f274b6d20a946443
 import productsRouter from './Routers/productsRouter.js';
 import cartRouter from './Routers/cartRouter.js';
 

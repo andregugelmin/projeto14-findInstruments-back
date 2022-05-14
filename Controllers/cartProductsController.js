@@ -10,7 +10,7 @@ export async function getCartProducts(req, res) {
         const userCartProducts = cartProducts.filter(
             (product) => product.username === user.name
         );
-        res.send(userCartProducts);
+        res.send({ products: userCartProducts });
     } catch (e) {
         console.error(chalk.bold.red('Could not get cart products'), e);
         res.status(500).send({

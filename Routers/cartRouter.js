@@ -8,7 +8,7 @@ import {
 
 const cartProductRouter = Router();
 
-cartProductRouter.get('/cart', getCartProducts);
+cartProductRouter.get('/cart', validToken, getCartProducts);
 cartProductRouter.post('/cart', validToken, postCartProduct);
 cartProductRouter.delete('/cart/:PRODUCT_ID', deleteCartProduct);
 

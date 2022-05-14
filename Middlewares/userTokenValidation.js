@@ -25,6 +25,7 @@ export async function validToken(req, res, next) {
         //         message: 'User Id not found in data base',
         //     });
         // }
+        res.locals.user = session.username;
     } catch (e) {
         return res.status(500).send('Could not valid session ' + e);
     }

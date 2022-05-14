@@ -21,9 +21,9 @@ export async function getCartProducts(req, res) {
 }
 
 export async function postCartProduct(req, res) {
-    const productInfo = res.body;
+    const productInfo = req.body;
     const user = res.locals.user;
-
+    console.log(productInfo);
     try {
         await db.collection('cart').insertOne({
             username: user,

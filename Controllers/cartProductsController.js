@@ -8,7 +8,7 @@ export async function getCartProducts(req, res) {
     try {
         const cartProducts = await db.collection('cart').find().toArray();
         const userCartProducts = cartProducts.filter(
-            (product) => product.username === user
+            (product) => product.email === user.email
         );
         res.send({ products: userCartProducts });
     } catch (e) {
@@ -26,7 +26,8 @@ export async function postCartProduct(req, res) {
     console.log(productInfo);
     try {
         await db.collection('cart').insertOne({
-            username: user,
+            username: user.username,
+            email: user.email,
             name: productInfo.name,
             image: productInfo.image,
             price: productInfo.price,

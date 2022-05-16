@@ -16,16 +16,7 @@ export async function validToken(req, res, next) {
                 message: 'Sessions not found in data base',
             });
 
-        // const user = await db
-        //     .collection('users')
-        //     .findOne({ _id: session.userId });
-
-        // if (!user) {
-        //     return res.status(401).send({
-        //         message: 'User Id not found in data base',
-        //     });
-        // }
-        res.locals.user = session.username;
+        res.locals.user = session;
     } catch (e) {
         return res.status(500).send('Could not valid session ' + e);
     }

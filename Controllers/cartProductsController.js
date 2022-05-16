@@ -44,25 +44,50 @@ export async function postCartProduct(req, res) {
 
 export async function deleteCartProduct(req, res) {
     const { PRODUCT_ID } = req.params;
+    const user = res.locals.user;
 
     try {
-        const product = await db
-            .collection('cart')
-            .findOne({ _id: new ObjectId(PRODUCT_ID) });
-        if (!product) {
-            res.status(404).send({
-                message: 'Product ID not found on database',
-            });
-            return;
+        if (PRODUCT_ID === 'all') {
+            await db.collection('cart').deleteMany({ email: user.email });
+            res.sendStatus(201);
+        } else {
+            const product = await db
+                .collection('cart')
+                .findOne({ _id: new ObjectId(PRODUCT_ID) });
+            if (!product) {
+                res.status(404).send({
+                    message: 'Product ID not found on database',
+                });
+                return;
+            }
+
+            await db
+                .collection('cart')
+                .deleteOne({ _id: new ObjectId(PRODUCT_ID) });
+
+            res.sendStatus(201);
         }
-
-        await db
-            .collection('cart')
-            .deleteOne({ _id: new ObjectId(PRODUCT_ID) });
-
-        res.sendStatus(201);
     } catch (e) {
         console.error(chalk.bold.red('Could not delete cart product'), e);
+        res.status(500).send({
+            error: e,
+            message: 'Server error on deleting cart produt',
+        });
+    }
+}
+
+export async function postPurchase(req, res) {
+    const purchaseInfo = req.body;
+    const user = res.locals.user;
+    try {
+        await db.collection('cart').insertOne({
+            username: user.name,
+            email: user.email,
+            totalPrice: purchaseInfo.totalPrice,
+        });
+        res.sendStatus(201);
+    } catch (e) {
+        console.error(chalk.bold.red('Could not post purchase'), e);
         res.status(500).send({
             error: e,
             message: 'Server error on deleting cart produt',

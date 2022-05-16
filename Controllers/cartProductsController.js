@@ -85,6 +85,7 @@ export async function postPurchase(req, res) {
             email: user.email,
             totalPrice: purchaseInfo.totalPrice,
         });
+        await db.collection('cart').deleteMany({ email: user.email });
         res.sendStatus(201);
     } catch (e) {
         console.error(chalk.bold.red('Could not post purchase'), e);
